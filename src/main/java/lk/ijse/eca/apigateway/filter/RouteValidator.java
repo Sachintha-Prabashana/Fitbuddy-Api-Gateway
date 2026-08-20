@@ -19,6 +19,11 @@ public class RouteValidator {
                 String path = request.getURI().getPath();
                 String method = request.getMethod().name();
                 
+                // Allow public access to uploaded profile images
+                if (path.startsWith("/api/v1/members/uploads/")) {
+                    return false;
+                }
+                
                 // Allow login and refresh endpoints
                 if (path.equals("/api/v1/members/login") || path.equals("/api/v1/members/refresh")) {
                     return false;
